@@ -67,20 +67,20 @@
             <div class="flex flex-1">
                 <div class="salle bg-gray-200 w-1/3">
                     <div class="flex justify-center">
-                        <h3 class="text-black pt-2 text-lg">Salle de conférence</h3>
+                        <h3 class="text-black pt-2 text-lg">Conference Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
 
                 </div>
                 <div class="salle bg-red-200 w-1/3">
                     <div class="flex justify-center">
-                        <h3 class="text-black pt-2 text-lg">Salle de Réception</h3>
+                        <h3 class="text-black pt-2 text-lg">Reception Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
                 </div>
                 <div class="salle bg-red-200 w-1/3">
                     <div class="flex justify-center">
-                        <h3 class="text-black pt-2 text-lg">Salle des serveurs</h3>
+                        <h3 class="text-black pt-2 text-lg">Servers Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
                 </div>
@@ -90,19 +90,19 @@
             <div class="flex flex-1">
                 <div class="salle bg-red-200 w-1/3">
                     <div class="flex justify-center">
-                        <h3 class="text-black pt-2 text-lg">Salle de sécurité</h3>
+                        <h3 class="text-black pt-2 text-lg">Security Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
                 </div>
                 <div class="salle bg-gray-200 w-1/3">
                     <div class="flex justify-center">
-                        <h3 class="text-black pt-2 text-lg">Salle du personnel</h3>
+                        <h3 class="text-black pt-2 text-lg">Staff Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
                 </div>
                 <div class="salle bg-red-200 w-1/3">
                     <div class="flex justify-center">
-                        <h3 class="text-black pt-2 text-lg">Salle d'archives</h3>
+                        <h3 class="text-black pt-2 text-lg">Archives Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
                 </div>
@@ -125,17 +125,15 @@
                     <div class="space-y-4">
                         <div class="flex items-center gap-6">
                             <div>
-                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-24 w-24 border-4 border-white"
-                                    data-alt="Default user avatar"
-                                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak");'>
+                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-24 w-24 border-4 border-white" data-alt="Default user avatar" id="profileAvatar">
                                 </div>
                             </div>
                             <div class="flex flex-col flex-1">
                                 <p class="text-[#111418] font-medium pb-2">
-                                    URL de la photo</p>
+                                    URL de la photo (optional)</p>
                                 <input
                                     class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] p-[15px] text-base font-normal"
-                                    placeholder="https://example.com/image.jpg" value="">
+                                    placeholder="https://example.com/image.jpg" id="photoInput">
                             </div>
                         </div>
                         <div class="flex gap-4">
@@ -144,12 +142,12 @@
                                     Nom complet</p>
                                 <input
                                     class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal"
-                                    placeholder="ex: Achraf Agourram" value="">
+                                    placeholder="ex: Achraf Agourram">
                             </div>
                             <div class="flex flex-col min-w-40 flex-1">
                                 <p class="text-[#111418] text-base font-medium pb-2">
                                     Rôle</p>
-                                <select class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal" placeholder="ex: Développeur front-end" value="">
+                                <select class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal">
                                     <option value="reception">Receptionist</option>
                                     <option value="technician">Technician</option>
                                     <option value="security">Security</option>
@@ -178,24 +176,24 @@
                                     Titre du poste</p>
                                 <input
                                     class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm"
-                                    placeholder="ex: Chef de projet" value="">
+                                    placeholder="ex: Chef de projet">
                             </div>
                             <div class="flex flex-col">
                                 <p class="text-[#111418] text-sm font-medium pb-2">
                                     Entreprise</p>
                                 <input
                                     class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] h-12 placeholder:text-[#617589] px-3 text-sm"
-                                    placeholder="ex: WorkSphere" value="">
+                                    placeholder="ex: WorkSphere">
                             </div>
                             <div class="flex flex-col">
                                 <p class="text-[#111418] text-sm font-medium pb-2">
                                     Start Date</p>
-                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm" placeholder="Start Date" type="date" value="">
+                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm" type="date">
                             </div>
                             <div class="flex flex-col">
                                 <p class="text-[#111418] text-sm font-medium pb-2">
                                     End Date</p>
-                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm" placeholder="End Date" type="date" value="">
+                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm" type="date">
                             </div>
                             <button
                                 class="absolute top-3 right-3 flex items-center justify-center h-7 w-7 rounded-full bg-red-500 text-white hover:bg-red-600">
