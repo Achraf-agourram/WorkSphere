@@ -12,9 +12,25 @@ function displayFormualire() {
             profileAvatar.style.backgroundImage = `url('${defaultAvatar}')`;
         }
     });
+    addNewExperienceBtn.addEventListener("click", addNewExperience);
 }
 function closeFormualire() {
     formulaire.classList.add("hidden");
+}
+function addNewExperience(){
+    const originalExperienceCard = document.querySelector('.experience-form');
+    const experienceContainer = document.querySelector('.experiences-conatainer');
+    const newExperienceCard = originalExperienceCard.cloneNode(true);
+    const deleteCardBtn = `
+    <button class="absolute top-3 right-3 flex items-center justify-center h-7 w-7 rounded-full bg-red-500 text-white hover:bg-red-600 delete-experience">
+        <span class="material-symbols-outlined text-base">delete</span>
+    </button>`
+    newExperienceCard.innerHTML += deleteCardBtn;
+
+    newExperienceCard.querySelector(".delete-experience").addEventListener("click", () => {
+        newExperienceCard.remove();
+    });
+    experienceContainer.appendChild(newExperienceCard);
 }
 
 const addWorkerBtn = document.getElementById('addNewWorker');
@@ -23,8 +39,10 @@ const closeFormulaireBtns = Array.from(document.getElementsByClassName('closeFor
 const defaultAvatar = "https://www.gravatar.com/avatar/?d=mp&s=128"
 const profileAvatar = document.getElementById('profileAvatar');
 profileAvatar.style.backgroundImage = `url('${defaultAvatar}')`;
+const addNewExperienceBtn = document.getElementById('addNewExperience');
 
 
 addWorkerBtn.addEventListener('click', displayFormualire);
+
 
 // https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak
