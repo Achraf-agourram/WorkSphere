@@ -6,19 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorkSphere</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="text-[#111418]">
-    <header class="flex items-center px-6 py-3">
-        <button
-            class="flex cursor-pointer items-center rounded-lg h-10 px-4 bg-[#28a745] text-white text-sm font-bold">Add
-            New Worker</button>
-    </header>
-    <main class="flex flex-col lg:flex-row">
+<body class="relative text-[#111418]">
+    <main class="flex flex-col h-full lg:flex-row h-screen">
         <aside class="flex flex-col lg:w-80 p-4">
             <h1 class="text-xl font-bold">Unassigned Staff</h1>
-            <div class="flex-1 space-y-1 pr-2 pt-2">
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <div class="flex-1 space-y-1 pr-2 pt-2 overflow-y-auto">
+                <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
                     <div class="flex items-center gap-3">
                         <img class="size-10 rounded-full" alt="Staff member avatar"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTy-azyWsSXv0usUVkEdDXVYuOqb0r2QbPgJLPU1jjCwxMUaeMLXyzgzcOQB-aYcq8L1IasvTYRNT6JFJ5iUE9KFpCAUYLQT8Ay5-SYNHxcXDO87zYgvuKBYZGcZUYhirFGXrJg6Oq-zjIk343SC_LDYp_tMfZl1KOrvdY2Xr4RP8rCfFTk5m5Aw9_w8ivNctNpWeZ3-GiMCe5mPCbO85C1Dn1FaNcR6UAjNiFBBs39lp7ZdaY-T6dp-ezPb8oEltyGnuC6VdNHsI">
@@ -29,7 +26,7 @@
                     </div>
                     <div class="size-3 rounded-full bg-[#137fec]" title="Receptionist Role"></div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
                     <div class="flex items-center gap-3">
                         <img class="size-10 rounded-full" alt="Staff member avatar"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTy-azyWsSXv0usUVkEdDXVYuOqb0r2QbPgJLPU1jjCwxMUaeMLXyzgzcOQB-aYcq8L1IasvTYRNT6JFJ5iUE9KFpCAUYLQT8Ay5-SYNHxcXDO87zYgvuKBYZGcZUYhirFGXrJg6Oq-zjIk343SC_LDYp_tMfZl1KOrvdY2Xr4RP8rCfFTk5m5Aw9_w8ivNctNpWeZ3-GiMCe5mPCbO85C1Dn1FaNcR6UAjNiFBBs39lp7ZdaY-T6dp-ezPb8oEltyGnuC6VdNHsI">
@@ -40,10 +37,10 @@
                     </div>
                     <div class="size-3 rounded-full bg-[#fd7e14]" title="Technician Role"></div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
                     <div class="flex items-center gap-3">
                         <img class="size-10 rounded-full" alt="Staff member avatar"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGotwHutqq6FyfKUwuChpZ4F0HQ55E_oHBLT3MreSJi9Tm7aUg3eHAzw4tN2faaJDvDkJ91rK66t5Efz1oDXqEhxV_uy10ibPUQyOuttj6_VF8yRc6T85ZkqpAlj-CbEUByMN6XHeOW2SKg6_Px-FVMTQSaLoNVBoRfp2IoULXZX3KhawOEleJvjVKg6e1S2TCT2MKfubITrsm8q6Hbbu5DGU_6Id2V1ndr2B4bsRj_TXlbk2ReM_R1pI4BeJNeDfLD5X2txP7uAw" />
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGotwHutqq6FyfKUwuChpZ4F0HQ55E_oHBLT3MreSJi9Tm7aUg3eHAzw4tN2faaJDvDkJ91rK66t5Efz1oDXqEhxV_uy10ibPUQyOuttj6_VF8yRc6T85ZkqpAlj-CbEUByMN6XHeOW2SKg6_Px-FVMTQSaLoNVBoRfp2IoULXZX3KhawOEleJvjVKg6e1S2TCT2MKfubITrsm8q6Hbbu5DGU_6Id2V1ndr2B4bsRj_TXlbk2ReM_R1pI4BeJNeDfLD5X2txP7uAw">
                         <div>
                             <p class="font-bold ">G. Moreau</p>
                             <p class="text-sm text-[#617589]">Security</p>
@@ -51,10 +48,10 @@
                     </div>
                     <div class="size-3 rounded-full bg-[#dc3545]" title="Security Role"></div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
                     <div class="flex items-center gap-3">
                         <img class="size-10 rounded-full" alt="Staff member avatar"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1x4d3mfQtSUkxXgdcoH5xLEruUdwq6mcC8a4PGZjPSBHMadeCEshD_LYMkrrWta1_IrO2-fisrgjruRpVqp5z3kUmUD6jSKvMl3nUefnnwFFpec3C5uyXLqFhu2Nz2vlA2jv5RXEEvwb6UZR1wMF7eWRoO4z5J1-_alRQw84-zrN_DhAsTRZyMHDQ1xPpwyecHsZVGixnZvB7XSjj_ItRdwCWB3UMy44zbRAa8q9kE4L21zv1JeGUEkO1_s4josFaie0des3bp4A" />
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1x4d3mfQtSUkxXgdcoH5xLEruUdwq6mcC8a4PGZjPSBHMadeCEshD_LYMkrrWta1_IrO2-fisrgjruRpVqp5z3kUmUD6jSKvMl3nUefnnwFFpec3C5uyXLqFhu2Nz2vlA2jv5RXEEvwb6UZR1wMF7eWRoO4z5J1-_alRQw84-zrN_DhAsTRZyMHDQ1xPpwyecHsZVGixnZvB7XSjj_ItRdwCWB3UMy44zbRAa8q9kE4L21zv1JeGUEkO1_s4josFaie0des3bp4A">
                         <div>
                             <p class="font-bold ">H. Simon</p>
                             <p class="text-sm text-[#617589]">Admin</p>
@@ -63,7 +60,34 @@
                     <div class="size-3 rounded-full bg-gray-400" title="Admin Role"></div>
                 </div>
             </div>
+            <button class="flex cursor-pointer items-center px-12 rounded-lg h-10  bg-[#28a745] text-white text-sm font-bold">Add New Worker</button>
         </aside>
+        <div id="workspace" class="h-full w-full flex flex-col">
+            <div class="flex flex-1">
+                <div class="salle bg-red-200 w-1/3 flex flex-col">
+                        Salle de conférence
+                </div>
+                <div class="salle bg-red-200 w-1/3">
+                    Réception
+                </div>
+                <div class="salle bg-red-200 w-1/3">
+                    Salle des serveurs
+                </div>
+            </div>
+            <div class="salle h-24 bg-gray-300">
+            </div>
+            <div class="flex flex-1">
+                <div class="salle bg-red-200 w-1/3">
+                    Salle de sécurité
+                </div>
+                <div class="salle bg-red-200 w-1/3">
+                    Salle du personnel
+                </div>
+                <div class="salle bg-red-200 w-1/3">
+                    Salle d'archives
+                </div>
+            </div>
+        </div>
     </main>
 </body>
 
