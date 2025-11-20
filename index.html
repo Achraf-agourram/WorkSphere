@@ -142,13 +142,13 @@
                                 <p class="text-[#111418] text-base font-medium pb-2">
                                     Nom complet</p>
                                 <input
-                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal"
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input"
                                     placeholder="ex: Achraf Agourram">
                             </div>
                             <div class="flex flex-col min-w-40 flex-1">
                                 <p class="text-[#111418] text-base font-medium pb-2">
                                     Rôle</p>
-                                <select class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal">
+                                <select class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input">
                                     <option value="reception">Receptionist</option>
                                     <option value="technician">Technician</option>
                                     <option value="security">Security</option>
@@ -156,6 +156,22 @@
                                     <option value="cleaner">Cleaner</option>
                                     <option value="client">Client</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col min-w-40 flex-1">
+                                <p class="text-[#111418] text-base font-medium pb-2">
+                                    Email</p>
+                                <input
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input"
+                                    placeholder="ex: achrafagourram@gmail.com">
+                            </div>
+                            <div class="flex flex-col min-w-40 flex-1">
+                                <p class="text-[#111418] text-base font-medium pb-2">
+                                    Phone</p>
+                                <input
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input"
+                                    placeholder="ex: +212 712345678">
                             </div>
                         </div>
                     </div>
@@ -203,8 +219,8 @@
                 <button
                     class="rounded-lg px-6 py-3 text-base font-semibold text-gray-700 bg-white hover:bg-gray-100 border border-gray-300 closeFormulaire">Annuler</button>
                 <button
-                    class="flex items-center justify-center gap-2 rounded-lg bg-[#28a745] px-6 py-3 text-base font-semibold text-white">
-                    <span>Ajouter l'employé</span>
+                    class="flex items-center justify-center gap-2 rounded-lg bg-[#28a745] px-6 py-3 text-base font-semibold text-white" id="add-employee">
+                    <span>Add Employee</span>
                 </button>
             </div>
         </div>

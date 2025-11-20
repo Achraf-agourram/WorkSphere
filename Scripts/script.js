@@ -13,6 +13,7 @@ function displayFormualire() {
         }
     });
     addNewExperienceBtn.addEventListener("click", addNewExperience);
+    document.getElementById('add-employee').addEventListener("click", validatingData)
 }
 function closeFormualire() {
     formulaire.classList.add("hidden");
@@ -31,6 +32,10 @@ function addNewExperience(){
         newExperienceCard.remove();
     });
     experienceContainer.appendChild(newExperienceCard);
+}
+function validatingData(){
+    const inputs = document.getElementsByClassName('form-input');
+    console.log(inputs[0].value);
 }
 
 const addWorkerBtn = document.getElementById('addNewWorker');
