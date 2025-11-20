@@ -35,7 +35,9 @@ function addNewExperience(){
 }
 function validatingData(){
     const inputs = document.getElementsByClassName('form-input');
-    console.log(inputs[0].value);
+    if(!/^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/.test(inputs[1].value) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputs[3].value) || !/^\+212 [6-7]\d{8}$/.test(inputs[4].value)){
+        return false;
+    }
 }
 
 const addWorkerBtn = document.getElementById('addNewWorker');
@@ -48,6 +50,5 @@ const addNewExperienceBtn = document.getElementById('addNewExperience');
 
 
 addWorkerBtn.addEventListener('click', displayFormualire);
-
 
 // https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak
