@@ -41,9 +41,10 @@ function submitData(){
         return false;
     }
     unassignedWorkers.push(worker);
-    showAWorker(worker);
+    closeFormualire();
+    showAWorker(worker, "unassigned-workers-container");
 }
-function showAWorker(worker){
+function showAWorker(worker, container){
     const workerCard = `
     <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
         <div class="flex items-center gap-3">
@@ -55,13 +56,24 @@ function showAWorker(worker){
         </div>
     </div>
     `
-    document.getElementById('unassigned-workers-container').innerHTML += workerCard;
+    document.getElementById(container).innerHTML += workerCard;
 }
-function showAllWorkers(){
+function showAllWorkers(container){
     unassignedWorkers.forEach(worker => {
         if(!worker.photo){worker.photo = defaultAvatar}
-        showAWorker(worker);
+        showAWorker(worker, container);
     });
+}
+function assignWoker(roomToAssign){
+    console.log(roomToAssign);
+}
+function showPopupToAssign(roomToAssign){
+    document.getElementById("workersToAssignContainer").innerHTML = "";
+    popUp = document.getElementById('popUpAssign');
+    popUp.classList.remove('hidden');
+    popUp.querySelector('#closePopUpAssign').addEventListener("click", () => popUp.classList.add('hidden'));
+    showAllWorkers("workersToAssignContainer");
+    
 }
 
 const unassignedWorkers = [
@@ -75,8 +87,13 @@ const defaultAvatar = "https://www.gravatar.com/avatar/?d=mp&s=128"
 const profileAvatar = document.getElementById('profileAvatar');
 profileAvatar.style.backgroundImage = `url('${defaultAvatar}')`;
 const addNewExperienceBtn = document.getElementById('addNewExperience');
+const assignBtns = Array.from(document.getElementsByClassName('assign-btn'));
 
-showAllWorkers();
+showAllWorkers("unassigned-workers-container");
 addWorkerBtn.addEventListener('click', displayFormualire);
+assignBtns.forEach(btn => {
+    btn.addEventListener("click", () => showPopupToAssign(btn.id))
+});
 
-//showAWorker({photo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak', name: 'achraf agourram', role: 'reception', email: 'achraf@gmail.com', phone: '+212 705283823'})
+
+//workersToAssignContainer  showAWorker({photo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak', name: 'achraf agourram', role: 'reception', email: 'achraf@gmail.com', phone: '+212 705283823'})
