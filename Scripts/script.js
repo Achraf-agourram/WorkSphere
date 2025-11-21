@@ -6,9 +6,9 @@ function displayFormualire() {
         btn.addEventListener('click', closeFormualire);
     });
     photoInput.addEventListener("input", () => {
-        if(photoInput.value.trim()){
+        if (photoInput.value.trim()) {
             profileAvatar.style.backgroundImage = `url('${photoInput.value.trim()}')`;
-        }else{
+        } else {
             profileAvatar.style.backgroundImage = `url('${defaultAvatar}')`;
         }
     });
@@ -18,7 +18,7 @@ function displayFormualire() {
 function closeFormualire() {
     formulaire.classList.add("hidden");
 }
-function addNewExperience(){
+function addNewExperience() {
     const originalExperienceCard = document.querySelector('.experience-form');
     const experienceContainer = document.querySelector('.experiences-conatainer');
     const newExperienceCard = originalExperienceCard.cloneNode(true);
@@ -33,24 +33,25 @@ function addNewExperience(){
     });
     experienceContainer.appendChild(newExperienceCard);
 }
-function submitData(){
+function submitData() {
     const inputs = document.getElementsByClassName('form-input');
-    worker = {photo: inputs[0].value, name: inputs[1].value, role: inputs[2].value, email: inputs[3].value, phone: inputs[4].value}
-    if(!worker.photo){worker.photo = defaultAvatar}
-    if(!/^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/.test(worker.name) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(worker.email) || !/^\+212 [6-7]\d{8}$/.test(worker.phone)){
+    let worker = {id: idCount, photo: inputs[0].value, name: inputs[1].value, role: inputs[2].value, email: inputs[3].value, phone: inputs[4].value };
+    idCount++
+    if (!worker.photo) { worker.photo = defaultAvatar }
+    if (!/^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/.test(worker.name) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(worker.email) || !/^\+212 [6-7]\d{8}$/.test(worker.phone)) {
         return false;
     }
     unassignedWorkers.push(worker);
     closeFormualire();
     showAWorker(worker, "unassigned-workers-container");
 }
-function showAWorker(worker, container){
+function showAWorker(worker, container) {
     const workerCard = `
-    <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
+    <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg id${worker.id}">
         <div class="flex items-center gap-3">
             <img class="size-10 rounded-full" alt="Staff member avatar" src="${worker.photo}">
             <div>
-                <p class="font-bold ">${worker.name}</p>
+                <p class="font-bold">${worker.name}</p>
                 <p class="text-sm text-[#617589]">${worker.role}</p>
             </div>
         </div>
@@ -58,28 +59,139 @@ function showAWorker(worker, container){
     `
     document.getElementById(container).innerHTML += workerCard;
 }
-function showAllWorkers(container){
-    unassignedWorkers.forEach(worker => {
-        if(!worker.photo){worker.photo = defaultAvatar}
-        showAWorker(worker, container);
-    });
+function showAllWorkers(container, roomToAssign) {
+    if(!roomToAssign){
+        unassignedWorkers.forEach(worker => {
+            if (!worker.photo) { worker.photo = defaultAvatar }
+            showAWorker(worker, container);
+        });
+    }else{
+        let roles = rolesDict[roomToAssign];
+        roles.forEach(role => {
+            unassignedWorkers.forEach(worker => {
+                if(worker.role == role){
+                    showAWorker(worker, container);
+                }
+            });
+        });
+    }
 }
-function assignWoker(roomToAssign){
-    console.log(roomToAssign);
+function updateAnassignedWorkers(){
+    document.getElementById("unassigned-workers-container").innerHTML = "";
+    showAllWorkers("unassigned-workers-container", false);
 }
-function showPopupToAssign(roomToAssign){
-    document.getElementById("workersToAssignContainer").innerHTML = "";
+function assignWorker(roomToAssign) {
+    try {
+        if(roomsWithCurrentNum[roomToAssign] < limitNum){
+            let worker = unassignedWorkers.find(w => w.id === parseInt(selected.classList[6][2]));
+            let index = unassignedWorkers.findIndex(w => w.id === worker.id);
+            let workerCard = document.createElement("div");
+            workerCard.className = `rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer id${worker.id}`
+            workerCard.title = worker.name;
+            workerCard.innerHTML = `
+                                    <img src="${worker.photo}"
+                                        class="w-10 h-10 rounded-full object-cover border border-gray-100">
+                                    <button class="text-white hover:text-red-600 retirer-btn${worker.id}" title="Retirer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6 18 18 6M6 6l12 12">
+                                        </svg>
+                                    </button>
+                                    `
+            assignedWorkers.push(worker);
+            unassignedWorkers.splice(index, 1);
+            roomsWithCurrentNum[roomToAssign]++;
+            document.getElementById("workersToAssignContainer").innerHTML = "";
+            showAllWorkers("workersToAssignContainer", roomToAssign);
+            updateAnassignedWorkers();
+            selected = null;
+            updateObligatoryRoomsStatus()
+            switch (roomToAssign) {
+                case "conference-room":
+                    rooms[0].appendChild(workerCard);
+                    rooms[0].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 0, roomToAssign))
+                    break;
+                case "reception-room":
+                    rooms[1].appendChild(workerCard);
+                    rooms[1].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 1, roomToAssign))
+                    break;
+                case "servers-room":
+                    rooms[2].appendChild(workerCard);
+                    rooms[2].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 2, roomToAssign))
+                    break;
+                case "security-room":
+                    rooms[3].appendChild(workerCard);
+                    rooms[3].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 3, roomToAssign))
+                    break;
+                case "staff-room":
+                    rooms[4].appendChild(workerCard);
+                    rooms[4].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 4, roomToAssign))
+                    break;
+                case "archives-room":
+                    rooms[5].appendChild(workerCard);
+                    rooms[5].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 5, roomToAssign))
+                    break;
+            }
+        }else{alert("Sorry sir, the room is already full")}
+            
+    } catch (er) { console.log(er) }
+}
+function unassignWorker(worker, roomIndex, roomToUnassign){
+    let index = unassignedWorkers.findIndex(w => w.id === worker.id);
+    unassignedWorkers.push(worker);
+    assignedWorkers.splice(index, 1);
+    roomsWithCurrentNum[roomToUnassign]--;
+    rooms[roomIndex].querySelector(".id"+worker.id).remove();
+    updateAnassignedWorkers();
+    updateObligatoryRoomsStatus()
+}
+function showPopupToAssign(roomToAssign) {
+    const assign = () => assignWorker(roomToAssign);
+    const workersToAssignContainer = document.getElementById("workersToAssignContainer");
+    workersToAssignContainer.innerHTML = "";
     popUp = document.getElementById('popUpAssign');
     popUp.classList.remove('hidden');
-    popUp.querySelector('#closePopUpAssign').addEventListener("click", () => popUp.classList.add('hidden'));
-    showAllWorkers("workersToAssignContainer");
-    
+    popUp.querySelector('#closePopUpAssign').addEventListener("click", () => {
+        popUp.classList.add('hidden');
+        selected = null;
+        document.getElementById("assignWorkerBtn").removeEventListener("click", assign);
+    });
+    showAllWorkers("workersToAssignContainer", roomToAssign);
+
+    workersToAssignContainer.addEventListener("click", (e) => {
+        if (selected) {
+            selected.classList.replace("bg-gray-300", "bg-gray-100");
+        }
+        e.target.classList.replace("bg-gray-100", "bg-gray-300");
+        selected = e.target;
+    });
+    document.getElementById("assignWorkerBtn").addEventListener("click", assign);
+}
+function updateObligatoryRoomsStatus(){
+    let obligatoryRooms = ["reception-room", "servers-room", "security-room", "archives-room"];
+    for(let i=0; i<obligatoryRooms.length; i++){
+        if(roomsWithCurrentNum[obligatoryRooms[i]]){
+            document.querySelectorAll(".salle-obligatory")[i].classList.replace('bg-red-300', 'bg-green-300')
+        }else{
+            document.querySelectorAll(".salle-obligatory")[i].classList.replace('bg-green-300', 'bg-red-300')
+        }
+    }
 }
 
 const unassignedWorkers = [
-    {photo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak', name: 'achraf agourram', role: 'admin', email: 'achraf@gmail.com', phone: '+212 705283823'},
-    {photo: '', name: 'rayan r', role: 'technician', email: 'achraf@gmail.com', phone: '+212 705283823'}
+    { id: 0, photo: 'https://intranet.youcode.ma/storage/users/profile/thumbnail/1741-1760996434.png', name: 'achraf agourram', role: 'manager', email: 'achraf@gmail.com', phone: '+212 705283823' },
+    { id: 1, photo: 'https://img.freepik.com/premium-vector/male-face-avatar-icon-set-flat-design-social-media-profiles_1281173-3806.jpg', name: 'rayan r', role: 'technician', email: 'rayan@gmail.com', phone: '+212 705283823'},
+    { id: 2, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/427/large_2x/man-avatar-character-isolated-icon-free-vector.jpg', name: 'manal m', role: 'reception', email: 'achraf@gmail.com', phone: '+212 705283823'},
+    { id: 3, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/332/large_2x/ablack-man-avatar-character-isolated-icon-free-vector.jpg', name: 'aicha a', role: 'cleaner', email: 'rayan@gmail.com', phone: '+212 705283823'},
+    { id: 4, photo: '', name: 'salma s', role: 'client', email: 'achraf@gmail.com', phone: '+212 705283823'},
+    { id: 5, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg', name: 'hassan h', role: 'security', email: 'rayan@gmail.com', phone: '+212 705283823'}
 ];
+const assignedWorkers = [];
+const roomsWithCurrentNum = {"conference-room": 0, "reception-room": 0, "servers-room": 0, "security-room": 0, "staff-room": 0, "archives-room": 0}
+var idCount = 6;
+var selected = null;
+const limitNum = 6;
 const addWorkerBtn = document.getElementById('addNewWorker');
 const formulaire = document.getElementById('formulaire');
 const closeFormulaireBtns = Array.from(document.getElementsByClassName('closeFormulaire'));
@@ -88,12 +200,11 @@ const profileAvatar = document.getElementById('profileAvatar');
 profileAvatar.style.backgroundImage = `url('${defaultAvatar}')`;
 const addNewExperienceBtn = document.getElementById('addNewExperience');
 const assignBtns = Array.from(document.getElementsByClassName('assign-btn'));
+const rooms = document.getElementsByClassName("assigned-room");
+const rolesDict = {"conference-room": ["reception", "technician", "security", "manager", "cleaner", "client"], "reception-room": ["reception", "manager", "cleaner"], "servers-room": ["technician", "manager", "cleaner"], "security-room": ["security", "manager", "cleaner"], "staff-room": ["reception", "technician", "manager", "cleaner"], "archives-room": ["manager"]}
 
-showAllWorkers("unassigned-workers-container");
+updateAnassignedWorkers();
 addWorkerBtn.addEventListener('click', displayFormualire);
 assignBtns.forEach(btn => {
-    btn.addEventListener("click", () => showPopupToAssign(btn.id))
+    btn.addEventListener("click", () => showPopupToAssign(btn.id));
 });
-
-
-//workersToAssignContainer  showAWorker({photo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak', name: 'achraf agourram', role: 'reception', email: 'achraf@gmail.com', phone: '+212 705283823'})
