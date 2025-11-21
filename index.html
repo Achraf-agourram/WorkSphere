@@ -7,64 +7,211 @@
     <title>WorkSphere</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+    <script src="Scripts/script.js" defer></script>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body class="relative text-[#111418]">
-    <header class="flex items-center px-6 py-3">
-        <button
-            class="flex cursor-pointer items-center rounded-lg h-10 px-4 bg-[#28a745] text-white text-sm font-bold">Add
-            New Worker</button>
-    </header>
-    <main class="flex flex-col lg:flex-row">
+    <main class="flex flex-col h-full lg:flex-row h-screen">
         <aside class="flex flex-col lg:w-80 p-4">
             <h1 class="text-xl font-bold">Unassigned Staff</h1>
-            <div class="flex-1 space-y-1 pr-2 pt-2">
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div class="flex items-center gap-3">
-                        <img class="size-10 rounded-full" alt="Staff member avatar"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTy-azyWsSXv0usUVkEdDXVYuOqb0r2QbPgJLPU1jjCwxMUaeMLXyzgzcOQB-aYcq8L1IasvTYRNT6JFJ5iUE9KFpCAUYLQT8Ay5-SYNHxcXDO87zYgvuKBYZGcZUYhirFGXrJg6Oq-zjIk343SC_LDYp_tMfZl1KOrvdY2Xr4RP8rCfFTk5m5Aw9_w8ivNctNpWeZ3-GiMCe5mPCbO85C1Dn1FaNcR6UAjNiFBBs39lp7ZdaY-T6dp-ezPb8oEltyGnuC6VdNHsI">
-                        <div>
-                            <p class="font-bold ">E. Durand</p>
-                            <p class="text-sm text-[#617589]">Receptionist</p>
-                        </div>
+            <div class="flex-1 space-y-1 pr-2 pt-2 overflow-y-auto" id="unassigned-workers-container">
+            </div>
+            <button
+                class="flex cursor-pointer items-center px-14 rounded-lg h-10  bg-[#28a745] text-white text-sm font-bold"
+                id="addNewWorker">Add New Worker</button>
+        </aside>
+        <div class="h-full w-full flex flex-col">
+            <div class="flex flex-1">
+                <div class="salle bg-gray-300 w-1/3">
+                    <div class="flex justify-center">
+                        <h3 class="text-black pt-2 text-lg">Conference Room</h3>
+                        <button class="w-10 pl-2 pt-2 assign-btn" id="conference-room"><img src="icons/plus.svg"
+                                alt="assign an employee"></button>
                     </div>
-                    <div class="size-3 rounded-full bg-[#137fec]" title="Receptionist Role"></div>
+                    <div class="grid grid-cols-3 gap-2 w-full assigned-room"></div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div class="flex items-center gap-3">
-                        <img class="size-10 rounded-full" alt="Staff member avatar"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTy-azyWsSXv0usUVkEdDXVYuOqb0r2QbPgJLPU1jjCwxMUaeMLXyzgzcOQB-aYcq8L1IasvTYRNT6JFJ5iUE9KFpCAUYLQT8Ay5-SYNHxcXDO87zYgvuKBYZGcZUYhirFGXrJg6Oq-zjIk343SC_LDYp_tMfZl1KOrvdY2Xr4RP8rCfFTk5m5Aw9_w8ivNctNpWeZ3-GiMCe5mPCbO85C1Dn1FaNcR6UAjNiFBBs39lp7ZdaY-T6dp-ezPb8oEltyGnuC6VdNHsI">
-                        <div>
-                            <p class="font-bold ">F. Leroy</p>
-                            <p class="text-sm text-[#617589]">Technician</p>
-                        </div>
+                <div class="salle salle-obligatory bg-red-300 w-1/3">
+                    <div class="flex justify-center">
+                        <h3 class="text-black pt-2 text-lg">Reception Room</h3>
+                        <button class="w-10 pl-2 pt-2 assign-btn" id="reception-room"><img src="icons/plus.svg"
+                                alt="assign an employee"></button>
                     </div>
-                    <div class="size-3 rounded-full bg-[#fd7e14]" title="Technician Role"></div>
+                    <div class="grid grid-cols-3 gap-2 w-full assigned-room"></div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div class="flex items-center gap-3">
-                        <img class="size-10 rounded-full" alt="Staff member avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGotwHutqq6FyfKUwuChpZ4F0HQ55E_oHBLT3MreSJi9Tm7aUg3eHAzw4tN2faaJDvDkJ91rK66t5Efz1oDXqEhxV_uy10ibPUQyOuttj6_VF8yRc6T85ZkqpAlj-CbEUByMN6XHeOW2SKg6_Px-FVMTQSaLoNVBoRfp2IoULXZX3KhawOEleJvjVKg6e1S2TCT2MKfubITrsm8q6Hbbu5DGU_6Id2V1ndr2B4bsRj_TXlbk2ReM_R1pI4BeJNeDfLD5X2txP7uAw">
-                        <div>
-                            <p class="font-bold ">G. Moreau</p>
-                            <p class="text-sm text-[#617589]">Security</p>
-                        </div>
+                <div class="salle salle-obligatory bg-red-300 w-1/3">
+                    <div class="flex justify-center">
+                        <h3 class="text-black pt-2 text-lg">Servers Room</h3>
+                        <button class="w-10 pl-2 pt-2 assign-btn" id="servers-room"><img src="icons/plus.svg"
+                                alt="assign an employee"></button>
                     </div>
-                    <div class="size-3 rounded-full bg-[#dc3545]" title="Security Role"></div>
-                </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div class="flex items-center gap-3">
-                        <img class="size-10 rounded-full" alt="Staff member avatar"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1x4d3mfQtSUkxXgdcoH5xLEruUdwq6mcC8a4PGZjPSBHMadeCEshD_LYMkrrWta1_IrO2-fisrgjruRpVqp5z3kUmUD6jSKvMl3nUefnnwFFpec3C5uyXLqFhu2Nz2vlA2jv5RXEEvwb6UZR1wMF7eWRoO4z5J1-_alRQw84-zrN_DhAsTRZyMHDQ1xPpwyecHsZVGixnZvB7XSjj_ItRdwCWB3UMy44zbRAa8q9kE4L21zv1JeGUEkO1_s4josFaie0des3bp4A">
-                        <div>
-                            <p class="font-bold ">H. Simon</p>
-                            <p class="text-sm text-[#617589]">Admin</p>
-                        </div>
-                    </div>
-                    <div class="size-3 rounded-full bg-gray-400" title="Admin Role"></div>
+                    <div class="grid grid-cols-3 gap-2 w-full assigned-room"></div>
                 </div>
             </div>
-        </aside>
+            <div class="h-24 bg-gray-300">
+            </div>
+            <div class="flex flex-1">
+                <div class="salle salle-obligatory bg-red-300 w-1/3">
+                    <div class="flex justify-center">
+                        <h3 class="text-black pt-2 text-lg">Security Room</h3>
+                        <button class="w-10 pl-2 pt-2 assign-btn" id="security-room"><img src="icons/plus.svg"
+                                alt="assign an employee"></button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 w-full assigned-room"></div>
+                </div>
+                <div class="salle bg-gray-300 w-1/3">
+                    <div class="flex justify-center">
+                        <h3 class="text-black pt-2 text-lg">Staff Room</h3>
+                        <button class="w-10 pl-2 pt-2 assign-btn" id="staff-room"><img src="icons/plus.svg"
+                                alt="assign an employee"></button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 w-full assigned-room"></div>
+                </div>
+                <div class="salle salle-obligatory bg-red-300 w-1/3">
+                    <div class="flex justify-center">
+                        <h3 class="text-black pt-2 text-lg">Archives Room</h3>
+                        <button class="w-10 pl-2 pt-2 assign-btn" id="archives-room"><img src="icons/plus.svg"
+                                alt="assign an employee"></button>
+                    </div>
+                    <div class="grid grid-cols-3 gap-2 w-full assigned-room"></div>
+                </div>
+            </div>
+        </div>
     </main>
+    <div class="hidden absolute flex min-h-screen w-full flex-col items-center justify-center p-4 top-0" id="formulaire">
+        <div class="fixed inset-0 bg-black/50"></div>
+        <div class="z-10 flex h-[90vh] w-full max-w-3xl flex-col bg-white rounded-xl">
+            <div class="flex items-center justify-between p-2 border-b border-gray-200">
+                <p class="text-[#111418] text-2xl font-black">Ajouter
+                    un nouvel employé</p>
+                <button class="text-gray-400 hover:text-red-600 closeFormulaire">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="flex-1 p-4 space-y-2 overflow-y-auto">
+                <div>
+                    <h3 class="text-lg font-bold text-[#111418]">Informations personnelles</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-6">
+                            <div>
+                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-24 w-24 border-4 border-white"
+                                    data-alt="Default user avatar" id="profileAvatar">
+                                </div>
+                            </div>
+                            <div class="flex flex-col flex-1">
+                                <p class="text-[#111418] font-medium pb-2">
+                                    URL de la photo (optional)</p>
+                                <input
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] p-[15px] text-base font-normal form-input"
+                                    placeholder="https://example.com/image.jpg" id="photoInput">
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col min-w-40 flex-1">
+                                <p class="text-[#111418] text-base font-medium pb-2">
+                                    Nom complet</p>
+                                <input
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input"
+                                    placeholder="ex: Achraf Agourram">
+                            </div>
+                            <div class="flex flex-col min-w-40 flex-1">
+                                <p class="text-[#111418] text-base font-medium pb-2">
+                                    Rôle</p>
+                                <select
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input">
+                                    <option value="reception">Receptionist</option>
+                                    <option value="technician">Technician</option>
+                                    <option value="security">Security</option>
+                                    <option value="manager">Manager</option>
+                                    <option value="cleaner">Cleaner</option>
+                                    <option value="client">Client</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex flex-col min-w-40 flex-1">
+                                <p class="text-[#111418] text-base font-medium pb-2">
+                                    Email</p>
+                                <input
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input"
+                                    placeholder="ex: achrafagourram@gmail.com">
+                            </div>
+                            <div class="flex flex-col min-w-40 flex-1">
+                                <p class="text-[#111418] text-base font-medium pb-2">
+                                    Phone</p>
+                                <input
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input"
+                                    placeholder="ex: +212 712345678">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-bold text-[#111418]">Expériences professionnelles</h3>
+                        <button
+                            class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white bg-[#28a745]"
+                            id="addNewExperience">
+                            <span class="material-symbols-outlined text-base">add</span>
+                            <span>Add new experience</span>
+                        </button>
+                    </div>
+                    <div class="space-y-2 experiences-container">
+                        <div class="relative flex gap-4 rounded-lg border border-gray-200 bg-background-light p-4 experience-form">
+                            <div class="flex flex-col">
+                                <p class="text-[#111418] text-sm font-medium pb-2">
+                                    Titre du poste</p>
+                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm experience-input"
+                                    placeholder="ex: Chef de projet">
+                            </div>
+                            <div class="flex flex-col">
+                                <p class="text-[#111418] text-sm font-medium pb-2">
+                                    Entreprise</p>
+                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] h-12 placeholder:text-[#617589] px-3 text-sm experience-input"
+                                    placeholder="ex: WorkSphere">
+                            </div>
+                            <div class="flex flex-col">
+                                <p class="text-[#111418] text-sm font-medium pb-2">
+                                    Start Date</p>
+                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm experience-input"
+                                    type="date">
+                            </div>
+                            <div class="flex flex-col">
+                                <p class="text-[#111418] text-sm font-medium pb-2">
+                                    End Date</p>
+                                <input
+                                    class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm experience-input"
+                                    type="date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-end gap-4 p-6 border-t border-gray-200 bg-gray-50">
+                <button
+                    class="rounded-lg px-6 py-3 text-base font-semibold text-gray-700 bg-white hover:bg-gray-100 border border-gray-300 closeFormulaire">Annuler</button>
+                <button
+                    class="flex items-center justify-center gap-2 rounded-lg bg-[#28a745] px-6 py-3 text-base font-semibold text-white"
+                    id="add-employee">
+                    <span>Add Employee</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 z-50 flex justify-center items-center" id="popUpAssign">
+        <div class="bg-white w-96 h-[80vh] p-6 rounded-lg shadow-2xl flex flex-col relative animate-fade-in">
+            <div class="flex justify-between items-center mb-6 flex-shrink-0">
+                <h2 class="text-2xl font-bold">Assign staff member</h2>
+                <button class="text-gray-500 hover:text-red-600 text-3xl font-bold" id="closePopUpAssign">
+                    &times;
+                </button>
+            </div>
+            <div id="workersToAssignContainer" class="flex-1 space-y-3 overflow-y-auto pr-2"></div>
+            <div class="mt-4 pt-4 border-t border-gray-200 flex-shrink-0">
+                <button class="w-full px-4 py-3 bg-green-600 text-white rounded-md font-semibold text-sm" id="assignWorkerBtn">Assign</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
