@@ -13,16 +13,15 @@ function displayFormualire() {
         }
     });
     addNewExperienceBtn.addEventListener("click", addNewExperience);
-    document.getElementById('add-employee').addEventListener("click", submitData)
+    document.getElementById('add-employee').addEventListener("click", addNewWorker)
 }
 function closeFormualire() {
     formulaire.classList.add("hidden");
 }
 function addNewExperience() {
-    const originalExperienceCard = document.querySelector('.experience-form');
-    const experienceContainer = document.querySelector('.experiences-conatainer');
-    const newExperienceCard = originalExperienceCard.cloneNode(true);
-    const deleteCardBtn = `
+    let experienceContainer = document.querySelector('.experiences-container');
+    let newExperienceCard = document.querySelector('.experience-form').cloneNode(true);
+    let deleteCardBtn = `
     <button class="absolute top-3 right-3 flex items-center justify-center h-7 w-7 rounded-full bg-red-500 text-white hover:bg-red-600 delete-experience">
         <span class="material-symbols-outlined text-base">delete</span>
     </button>`
@@ -33,17 +32,37 @@ function addNewExperience() {
     });
     experienceContainer.appendChild(newExperienceCard);
 }
-function submitData() {
+function addNewWorker() {
     const inputs = document.getElementsByClassName('form-input');
-    let worker = {id: idCount, photo: inputs[0].value, name: inputs[1].value, role: inputs[2].value, email: inputs[3].value, phone: inputs[4].value };
+    let worker = {id: idCount, photo: inputs[0].value, name: inputs[1].value, role: inputs[2].value, email: inputs[3].value, phone: inputs[4].value, experiences: []};
+    let valid = true;
     idCount++
     if (!worker.photo) { worker.photo = defaultAvatar }
     if (!/^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/.test(worker.name) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(worker.email) || !/^\+212 [6-7]\d{8}$/.test(worker.phone)) {
-        return false;
+        alert("Please Enter valid informations")
+        return;
     }
-    unassignedWorkers.push(worker);
-    closeFormualire();
-    showAWorker(worker, "unassigned-workers-container");
+    let experiencesArray = [];
+    let experiencesNode = Array.from(document.querySelectorAll('.experience-form'));
+    experiencesNode.forEach(exp => {
+        let object = {"poste": "", "entreprise": "", "startDate": "", "endDate": ""};
+        for(let i=0; i<4; i++){
+            if(exp.querySelectorAll('.experience-input')[i].value){
+                object[Object.keys(object)[i]] = exp.querySelectorAll('.experience-input')[i].value;
+            }else{
+                valid = false
+                alert("Please fill all informations about experiences");
+                break;
+            }
+        }
+        experiencesArray.push(object);
+    });
+    if(valid){
+        worker.experiences = experiencesArray;
+        unassignedWorkers.push(worker);
+        closeFormualire();
+        showAWorker(worker, "unassigned-workers-container");
+    }
 }
 function showAWorker(worker, container) {
     const workerCard = `
@@ -180,12 +199,12 @@ function updateObligatoryRoomsStatus(){
 }
 
 const unassignedWorkers = [
-    { id: 0, photo: 'https://intranet.youcode.ma/storage/users/profile/thumbnail/1741-1760996434.png', name: 'achraf agourram', role: 'manager', email: 'achraf@gmail.com', phone: '+212 705283823' },
-    { id: 1, photo: 'https://img.freepik.com/premium-vector/male-face-avatar-icon-set-flat-design-social-media-profiles_1281173-3806.jpg', name: 'rayan r', role: 'technician', email: 'rayan@gmail.com', phone: '+212 705283823'},
-    { id: 2, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/427/large_2x/man-avatar-character-isolated-icon-free-vector.jpg', name: 'manal m', role: 'reception', email: 'achraf@gmail.com', phone: '+212 705283823'},
-    { id: 3, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/332/large_2x/ablack-man-avatar-character-isolated-icon-free-vector.jpg', name: 'aicha a', role: 'cleaner', email: 'rayan@gmail.com', phone: '+212 705283823'},
-    { id: 4, photo: '', name: 'salma s', role: 'client', email: 'achraf@gmail.com', phone: '+212 705283823'},
-    { id: 5, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg', name: 'hassan h', role: 'security', email: 'rayan@gmail.com', phone: '+212 705283823'}
+    { id: 0, photo: 'https://intranet.youcode.ma/storage/users/profile/thumbnail/1741-1760996434.png', name: 'achraf agourram', role: 'manager', email: 'achraf@gmail.com', phone: '+212 705283823', experiences: []},
+    { id: 1, photo: 'https://img.freepik.com/premium-vector/male-face-avatar-icon-set-flat-design-social-media-profiles_1281173-3806.jpg', name: 'rayan r', role: 'technician', email: 'rayan@gmail.com', phone: '+212 705283823', experiences: []},
+    { id: 2, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/427/large_2x/man-avatar-character-isolated-icon-free-vector.jpg', name: 'manal m', role: 'reception', email: 'achraf@gmail.com', phone: '+212 705283823', experiences: []},
+    { id: 3, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/332/large_2x/ablack-man-avatar-character-isolated-icon-free-vector.jpg', name: 'aicha a', role: 'cleaner', email: 'rayan@gmail.com', phone: '+212 705283823', experiences: []},
+    { id: 4, photo: '', name: 'salma s', role: 'client', email: 'achraf@gmail.com', phone: '+212 705283823', experiences: []},
+    { id: 5, photo: 'https://static.vecteezy.com/system/resources/previews/002/002/403/large_2x/man-with-beard-avatar-character-isolated-icon-free-vector.jpg', name: 'hassan h', role: 'security', email: 'rayan@gmail.com', phone: '+212 705283823', experiences: []}
 ];
 const assignedWorkers = [];
 const roomsWithCurrentNum = {"conference-room": 0, "reception-room": 0, "servers-room": 0, "security-room": 0, "staff-room": 0, "archives-room": 0}
