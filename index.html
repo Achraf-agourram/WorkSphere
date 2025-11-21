@@ -16,26 +16,51 @@
         <aside class="flex flex-col lg:w-80 p-4">
             <h1 class="text-xl font-bold">Unassigned Staff</h1>
             <div class="flex-1 space-y-1 pr-2 pt-2 overflow-y-auto" id="unassigned-workers-container">
-                
+
             </div>
-            <button class="flex cursor-pointer items-center px-14 rounded-lg h-10  bg-[#28a745] text-white text-sm font-bold" id="addNewWorker">Add New Worker</button>
+            <button
+                class="flex cursor-pointer items-center px-14 rounded-lg h-10  bg-[#28a745] text-white text-sm font-bold"
+                id="addNewWorker">Add New Worker</button>
         </aside>
         <div id="workspace" class="h-full w-full flex flex-col">
             <div class="flex flex-1">
-                <div class="salle bg-gray-200 w-1/3">
+                <div class="salle bg-gray-300 w-1/3">
                     <div class="flex justify-center">
                         <h3 class="text-black pt-2 text-lg">Conference Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
+                    <div class="grid grid-cols-3 gap-2 w-full">
+                            <div id="carte_employe_assigne" class="rounded-lg flex flex-col items-center justify-center gap-1 cursor-pointer" title="John Doe">
+                                <img src="https://www.gravatar.com/avatar/?d=mp&s=128"
+                                    class="w-10 h-10 rounded-full object-cover border border-gray-100">
+
+                                <div class="flex items-center gap-2 mt-0.5">
+                                    <button class="text-white hover:text-green-600 transition" title="Déplacer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M7.5 21 3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5">
+                                        </svg>
+                                    </button>
+                                    <button class="text-white hover:text-red-600 transition" title="Retirer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6 18 18 6M6 6l12 12">
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                    </div>
 
                 </div>
-                <div class="salle bg-red-200 w-1/3">
+                <div class="salle bg-red-300 w-1/3">
                     <div class="flex justify-center">
                         <h3 class="text-black pt-2 text-lg">Reception Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
                 </div>
-                <div class="salle bg-red-200 w-1/3">
+                <div class="salle bg-red-300 w-1/3">
                     <div class="flex justify-center">
                         <h3 class="text-black pt-2 text-lg">Servers Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
@@ -45,19 +70,19 @@
             <div class="salle h-24 bg-gray-300">
             </div>
             <div class="flex flex-1">
-                <div class="salle bg-red-200 w-1/3">
+                <div class="salle bg-red-300 w-1/3">
                     <div class="flex justify-center">
                         <h3 class="text-black pt-2 text-lg">Security Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
                 </div>
-                <div class="salle bg-gray-200 w-1/3">
+                <div class="salle bg-gray-300 w-1/3">
                     <div class="flex justify-center">
                         <h3 class="text-black pt-2 text-lg">Staff Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
                     </div>
                 </div>
-                <div class="salle bg-red-200 w-1/3">
+                <div class="salle bg-red-300 w-1/3">
                     <div class="flex justify-center">
                         <h3 class="text-black pt-2 text-lg">Archives Room</h3>
                         <button class="w-10 pl-2 pt-2"><img src="icons/plus.svg" alt="assign an employee"></button>
@@ -66,7 +91,8 @@
             </div>
         </div>
     </main>
-    <div class="hidden absolute flex min-h-screen w-full flex-col items-center justify-center p-4 top-0" id="formulaire">
+    <div class="hidden absolute flex min-h-screen w-full flex-col items-center justify-center p-4 top-0"
+        id="formulaire">
         <div class="fixed inset-0 bg-black/50"></div>
         <div class="z-10 flex h-full w-full max-w-3xl flex-col bg-white rounded-xl shadow-2xl">
             <div class="flex items-center justify-between p-2 border-b border-gray-200">
@@ -82,7 +108,8 @@
                     <div class="space-y-4">
                         <div class="flex items-center gap-6">
                             <div>
-                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-24 w-24 border-4 border-white" data-alt="Default user avatar" id="profileAvatar">
+                                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-24 w-24 border-4 border-white"
+                                    data-alt="Default user avatar" id="profileAvatar">
                                 </div>
                             </div>
                             <div class="flex flex-col flex-1">
@@ -104,7 +131,8 @@
                             <div class="flex flex-col min-w-40 flex-1">
                                 <p class="text-[#111418] text-base font-medium pb-2">
                                     Rôle</p>
-                                <select class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input">
+                                <select
+                                    class="flex w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-10 placeholder:text-[#617589] pl-2 text-base font-normal form-input">
                                     <option value="reception">Receptionist</option>
                                     <option value="technician">Technician</option>
                                     <option value="security">Security</option>
@@ -136,13 +164,15 @@
                     <div class="flex justify-between items-center mb-4">
                         <h3 class="text-lg font-bold text-[#111418]">Expériences professionnelles</h3>
                         <button
-                            class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white bg-[#28a745]" id="addNewExperience">
+                            class="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-white bg-[#28a745]"
+                            id="addNewExperience">
                             <span class="material-symbols-outlined text-base">add</span>
                             <span>Add new experience</span>
                         </button>
                     </div>
                     <div class="space-y-2 experiences-conatainer">
-                        <div class="relative flex gap-4 rounded-lg border border-gray-200 bg-background-light p-4 experience-form">
+                        <div
+                            class="relative flex gap-4 rounded-lg border border-gray-200 bg-background-light p-4 experience-form">
                             <div class="flex flex-col">
                                 <p class="text-[#111418] text-sm font-medium pb-2">
                                     Titre du poste</p>
@@ -160,12 +190,16 @@
                             <div class="flex flex-col">
                                 <p class="text-[#111418] text-sm font-medium pb-2">
                                     Start Date</p>
-                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm" type="date">
+                                <input
+                                    class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm"
+                                    type="date">
                             </div>
                             <div class="flex flex-col">
                                 <p class="text-[#111418] text-sm font-medium pb-2">
                                     End Date</p>
-                                <input class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm" type="date">
+                                <input
+                                    class="w-full rounded-lg text-[#111418] border border-[#dbe0e6] bg-white h-12 placeholder:text-[#617589] px-3 text-sm"
+                                    type="date">
                             </div>
                         </div>
                     </div>
@@ -175,7 +209,8 @@
                 <button
                     class="rounded-lg px-6 py-3 text-base font-semibold text-gray-700 bg-white hover:bg-gray-100 border border-gray-300 closeFormulaire">Annuler</button>
                 <button
-                    class="flex items-center justify-center gap-2 rounded-lg bg-[#28a745] px-6 py-3 text-base font-semibold text-white" id="add-employee">
+                    class="flex items-center justify-center gap-2 rounded-lg bg-[#28a745] px-6 py-3 text-base font-semibold text-white"
+                    id="add-employee">
                     <span>Add Employee</span>
                 </button>
             </div>

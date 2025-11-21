@@ -57,8 +57,17 @@ function showAWorker(worker){
     `
     document.getElementById('unassigned-workers-container').innerHTML += workerCard;
 }
+function showAllWorkers(){
+    unassignedWorkers.forEach(worker => {
+        if(!worker.photo){worker.photo = defaultAvatar}
+        showAWorker(worker);
+    });
+}
 
-const unassignedWorkers = [];
+const unassignedWorkers = [
+    {photo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak', name: 'achraf agourram', role: 'admin', email: 'achraf@gmail.com', phone: '+212 705283823'},
+    {photo: '', name: 'rayan r', role: 'technician', email: 'achraf@gmail.com', phone: '+212 705283823'}
+];
 const addWorkerBtn = document.getElementById('addNewWorker');
 const formulaire = document.getElementById('formulaire');
 const closeFormulaireBtns = Array.from(document.getElementsByClassName('closeFormulaire'));
@@ -67,7 +76,7 @@ const profileAvatar = document.getElementById('profileAvatar');
 profileAvatar.style.backgroundImage = `url('${defaultAvatar}')`;
 const addNewExperienceBtn = document.getElementById('addNewExperience');
 
-
+showAllWorkers();
 addWorkerBtn.addEventListener('click', displayFormualire);
 
-showAWorker({photo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak', name: 'achraf agourram', role: 'reception', email: 'achraf@gmail.com', phone: '+212 705283823'})
+//showAWorker({photo: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCM2RiCrSua7VgaSDjE1Znd6izeDx4YJE_TCFxdakk5j-Kgh9ta3hBMWRyOPTDPKEWSE9GAulBDKfdm1tqFAAfkBkE2762euRUhc49XJQLASeaE1ueyUjVHSXnbogN1trK-KfkLUQa_ZfS70dS58mZU29xzae6wdsV9E2IYLyYbumzzcRTxWAjRhLxxfqH55btMulR6CA4ebECP2h5pwqxEEj5SIJHpI5Bcvu3jaOV0OlaOG0u66Xd9u8-Cz0v0Or6DMJA7KrA5Iak', name: 'achraf agourram', role: 'reception', email: 'achraf@gmail.com', phone: '+212 705283823'})
