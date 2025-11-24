@@ -1,3 +1,17 @@
+function scrollDown(){
+    document.getElementById('unassigned-workers-container').classList.remove('hidden');
+    addWorkerBtn.classList.remove('hidden');
+    scrollArrowBtn.querySelector('img').src = "icons/arrow-up.png";
+    scrollArrowBtn.removeEventListener("click", scrollDown);
+    scrollArrowBtn.addEventListener("click", scrollUp);
+}
+function scrollUp(){
+    document.getElementById('unassigned-workers-container').classList.add('hidden');
+    addWorkerBtn.classList.add('hidden');
+    scrollArrowBtn.querySelector('img').src = "icons/arrow-down.png";
+    scrollArrowBtn.removeEventListener("click", scrollUp);
+    scrollArrowBtn.addEventListener("click", scrollDown);
+}
 function displayFormualire() {
     formulaire.classList.remove("hidden");
     const photoInput = document.getElementById('photoInput');
@@ -95,7 +109,7 @@ function showAllWorkers(container, roomToAssign) {
         });
     }
 }
-function updateAnassignedWorkers(){
+function updateUnassignedWorkers(){
     document.getElementById("unassigned-workers-container").innerHTML = "";
     showAllWorkers("unassigned-workers-container", false);
 }
@@ -123,35 +137,12 @@ function assignWorker(roomToAssign) {
             roomsWithCurrentNum[roomToAssign]++;
             document.getElementById("workersToAssignContainer").innerHTML = "";
             showAllWorkers("workersToAssignContainer", roomToAssign);
-            updateAnassignedWorkers();
+            updateUnassignedWorkers();
             selected = null;
             updateObligatoryRoomsStatus()
-            switch (roomToAssign) {
-                case "conference-room":
-                    rooms[0].appendChild(workerCard);
-                    rooms[0].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 0, roomToAssign))
-                    break;
-                case "reception-room":
-                    rooms[1].appendChild(workerCard);
-                    rooms[1].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 1, roomToAssign))
-                    break;
-                case "servers-room":
-                    rooms[2].appendChild(workerCard);
-                    rooms[2].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 2, roomToAssign))
-                    break;
-                case "security-room":
-                    rooms[3].appendChild(workerCard);
-                    rooms[3].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 3, roomToAssign))
-                    break;
-                case "staff-room":
-                    rooms[4].appendChild(workerCard);
-                    rooms[4].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 4, roomToAssign))
-                    break;
-                case "archives-room":
-                    rooms[5].appendChild(workerCard);
-                    rooms[5].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, 5, roomToAssign))
-                    break;
-            }
+            let roomsDict = {"conference-room": 0, "reception-room": 1, "servers-room": 2, "security-room": 3, "staff-room": 4, "archives-room": 5};
+            rooms[roomsDict[roomToAssign]].appendChild(workerCard);
+            rooms[roomsDict[roomToAssign]].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, roomsDict[roomToAssign], roomToAssign))
         }else{alert("Sorry sir, the room is already full")}
             
     } catch (er) { console.log(er) }
@@ -162,7 +153,7 @@ function unassignWorker(worker, roomIndex, roomToUnassign){
     assignedWorkers.splice(index, 1);
     roomsWithCurrentNum[roomToUnassign]--;
     rooms[roomIndex].querySelector(".id"+worker.id).remove();
-    updateAnassignedWorkers();
+    updateUnassignedWorkers();
     updateObligatoryRoomsStatus()
 }
 function showPopupToAssign(roomToAssign) {
@@ -221,9 +212,11 @@ const addNewExperienceBtn = document.getElementById('addNewExperience');
 const assignBtns = Array.from(document.getElementsByClassName('assign-btn'));
 const rooms = document.getElementsByClassName("assigned-room");
 const rolesDict = {"conference-room": ["reception", "technician", "security", "manager", "cleaner", "client"], "reception-room": ["reception", "manager", "cleaner"], "servers-room": ["technician", "manager", "cleaner"], "security-room": ["security", "manager", "cleaner"], "staff-room": ["reception", "technician", "manager", "cleaner"], "archives-room": ["manager"]}
+const scrollArrowBtn = document.getElementById('scrollDownOrUp');
 
-updateAnassignedWorkers();
-addWorkerBtn.addEventListener('click', displayFormualire);
+updateUnassignedWorkers();
+scrollArrowBtn.addEventListener("click", scrollDown);
+addWorkerBtn.addEventListener("click", displayFormualire);
 assignBtns.forEach(btn => {
     btn.addEventListener("click", () => showPopupToAssign(btn.id));
 });

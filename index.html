@@ -14,11 +14,13 @@
 <body class="relative text-[#111418]">
     <main class="flex flex-col h-full lg:flex-row h-screen">
         <aside class="flex flex-col lg:w-80 p-4">
-            <h1 class="text-xl font-bold">Unassigned Staff</h1>
-            <div class="flex-1 space-y-1 pr-2 pt-2 overflow-y-auto" id="unassigned-workers-container">
+            <div class="flex justify-between">
+                <h1 class="text-xl font-bold">Unassigned Staff</h1>
+                <button class="lg:hidden w-6 pt-1" id="scrollDownOrUp"><img src="icons/arrow-down.png" alt="arrow down"></button>
             </div>
-            <button
-                class="flex cursor-pointer items-center px-14 rounded-lg h-10  bg-[#28a745] text-white text-sm font-bold"
+            
+            <div class="lg:block hidden flex-1 space-y-1 pr-2 pt-2 overflow-y-auto" id="unassigned-workers-container"></div>
+            <button class="lg:block hidden flex cursor-pointer items-center px-14 rounded-lg h-10  bg-[#28a745] text-white text-sm font-bold"
                 id="addNewWorker">Add New Worker</button>
         </aside>
         <div class="h-full w-full flex flex-col">
