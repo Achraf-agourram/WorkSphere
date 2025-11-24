@@ -12,6 +12,14 @@ function scrollUp(){
     scrollArrowBtn.removeEventListener("click", scrollUp);
     scrollArrowBtn.addEventListener("click", scrollDown);
 }
+function displayNotification(msg, color){
+    let notification = document.querySelector(".notification");
+    notification.textContent = msg;
+    notification.classList.replace("hidden", color);
+    setTimeout(() => {
+        notification.classList.replace(color, "hidden");
+    }, 2000);
+}
 function displayFormualire() {
     formulaire.classList.remove("hidden");
     const photoInput = document.getElementById('photoInput');
@@ -53,7 +61,7 @@ function addNewWorker() {
     idCount++
     if (!worker.photo) { worker.photo = defaultAvatar }
     if (!/^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)+$/.test(worker.name) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(worker.email) || !/^\+212 [6-7]\d{8}$/.test(worker.phone)) {
-        alert("Please Enter valid informations")
+        displayNotification("Please Enter valid informations", "bg-red-400");
         return;
     }
     let experiencesArray = [];
@@ -65,7 +73,7 @@ function addNewWorker() {
                 object[Object.keys(object)[i]] = exp.querySelectorAll('.experience-input')[i].value;
             }else{
                 valid = false
-                alert("Please fill all informations about experiences");
+                displayNotification("Please fill all informations about experiences", "bg-red-400");
                 break;
             }
         }
@@ -143,7 +151,7 @@ function assignWorker(roomToAssign) {
             let roomsDict = {"conference-room": 0, "reception-room": 1, "servers-room": 2, "security-room": 3, "staff-room": 4, "archives-room": 5};
             rooms[roomsDict[roomToAssign]].appendChild(workerCard);
             rooms[roomsDict[roomToAssign]].querySelector(".retirer-btn"+worker.id).addEventListener("click", () => unassignWorker(worker, roomsDict[roomToAssign], roomToAssign))
-        }else{alert("Sorry sir, the room is already full")}
+        }else{displayNotification("Sorry sir, the room is already full", "bg-red-400")}
             
     } catch (er) { console.log(er) }
 }
@@ -188,7 +196,6 @@ function updateObligatoryRoomsStatus(){
         }
     }
 }
-
 const unassignedWorkers = [
     { id: 0, photo: 'https://intranet.youcode.ma/storage/users/profile/thumbnail/1741-1760996434.png', name: 'achraf agourram', role: 'manager', email: 'achraf@gmail.com', phone: '+212 705283823', experiences: []},
     { id: 1, photo: 'https://img.freepik.com/premium-vector/male-face-avatar-icon-set-flat-design-social-media-profiles_1281173-3806.jpg', name: 'rayan r', role: 'technician', email: 'rayan@gmail.com', phone: '+212 705283823', experiences: []},
